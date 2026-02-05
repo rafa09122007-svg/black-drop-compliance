@@ -1,60 +1,68 @@
 "use client";
+import * as Lucide from 'lucide-react';
+import { Inter } from "next/font/google";
+import "./globals.css";
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { LayoutDashboard, Users, Truck, FileText, Settings } from 'lucide-react';
 
-export default function Sidebar() {
-  const pathname = usePathname();
-  
+const inter = Inter({ subsets: ["latin"] });
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   const menuItems = [
-    { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
-    { name: 'Driver Roster', href: '/drivers', icon: Users },
-    { name: 'Asset Management', href: '#', icon: Truck },
-    { name: 'Reports', href: '#', icon: FileText },
-    { name: 'Settings', href: '#', icon: Settings },
+    { name: 'Dashboard', icon: 'LayoutDashboard', href: '/' },
+    { name: 'Driver Roster', icon: 'Users', href: '/drivers' },
+    { name: 'Asset Management', icon: 'Truck', href: '/assets' },
+    { name: 'Reports', icon: 'FileText', href: '/reports' },
+    { name: 'Settings', icon: 'Settings', href: '/settings' },
   ];
 
   return (
-    <aside className="w-64 bg-slate-900 h-screen sticky top-0 flex flex-col border-r border-slate-800">
-      <div className="p-6">
-        <div className="flex flex-col">
-  <h2 className="text-white font-black text-xl tracking-tighter uppercase leading-none">
-    Black <span className="text-emerald-500">Drop</span>
-  </h2>
-  <p className="text-slate-500 text-[10px] font-bold uppercase tracking-[0.2em] mt-1">Trucking</p>
-</div>
-        <p className="text-slate-500 text-[10px] font-bold uppercase tracking-widest">Compliance v1.0</p>
-      </div>
-      
-      <nav className="flex-1 px-4 space-y-1 mt-4">
-        {menuItems.map((item) => {
-          const isActive = pathname === item.href;
-          return (
-            <Link 
-              key={item.name} 
-              href={item.href}
-              className={`flex items-center gap-3 px-4 py-3 rounded-lg font-bold text-sm transition-all ${
-                isActive 
-                  ? 'bg-emerald-500 text-white shadow-lg shadow-emerald-500/20' 
-                  : 'text-slate-400 hover:bg-slate-800 hover:text-slate-200'
-              }`}
-            >
-              <item.icon size={18} />
-              {item.name}
-            </Link>
-          );
-        })}
-      </nav>
+    <html lang="en">
+      <body className={inter.className}>
+        <div className="flex min-h-screen bg-slate-50">
+          {/* Sidebar */}
+          <aside className="w-64 bg-slate-900 text-white flex flex-col p-6 fixed h-full">
+            <div className="flex items-center gap-2 mb-10">
+              <div className="w-8 h-8 bg-emerald-500 rounded-lg flex items-center justify-center font-black">B</div>
+              <span className="font-black tracking-tighter uppercase italic">Black Drop</span>
+            </div>
+            
+            <nav className="flex-1 space-y-2">
+              {menuItems.map((item) => (
+                <Link 
+                  key={item.name} 
+                  href={item.href}
+                  className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-800 transition-colors text-sm font-bold text-slate-300 hover:text-white"
+                >
+                  <span className="text-emerald-400">
+                    {/* Safe Icon Loading */}
+                    {item.name === 'Dashboard' && <Lucide.LayoutDashboard size={18} />}
+                    {item.name === 'Driver Roster' && <Lucide.Users size={18} />}
+                    {item.name === 'Asset Management' && <Lucide.Truck size={18} />}
+                    {item.name === 'Reports' && <Lucide.FileText size={18} />}
+                    {item.name === 'Settings' && <Lucide.Settings size={18} />}
+                  </span>
+                  {item.name}
+                </Link>
+              ))}
+            </nav>
 
-      <div className="p-4 border-t border-slate-800">
-        <div className="flex items-center gap-3 px-4 py-3">
-          <div className="w-8 h-8 bg-emerald-500 rounded-full flex items-center justify-center font-bold text-white text-xs uppercase">RA</div>
-          <div className="overflow-hidden">
-            <p className="text-xs font-bold text-white truncate">Rafael Ayala</p>
-            <p className="text-[10px] text-slate-500 truncate lowercase">Admin Access</p>
-          </div>
+            <div className="mt-auto pt-6 border-t border-slate-800">
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-full bg-emerald-500 flex items-center justify-center text-[10px] font-bold">RA</div>
+                <div>
+                  <p className="text-xs font-black">Rafael Ayala</p>
+                  <p className="text-[10px] text-slate-500 uppercase">Admin Access</p>
+                </div>
+              </div>
+            </div>
+          </aside>
+
+          {/* Main Content Area */}
+          <main className="flex-1 ml-64 p-4">
+            {children}
+          </main>
         </div>
-      </div>
-    </aside>
+      </body>
+    </html>
   );
 }

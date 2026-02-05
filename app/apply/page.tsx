@@ -1,90 +1,40 @@
 "use client";
 import { useState } from 'react';
-import { FileSignature, User, IdCard, MapPin, CheckCircle } from 'lucide-react';
+import * as Lucide from 'lucide-react';
 
-export default function DriverApplication() {
-  const [submitted, setSubmitted] = useState(false);
-
-  if (submitted) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-screen bg-slate-50 p-6 text-center">
-        <div className="p-4 bg-emerald-100 text-emerald-600 rounded-full mb-4">
-          <CheckCircle size={48} />
-        </div>
-        <h2 className="text-2xl font-black text-slate-900 uppercase">Application Submitted</h2>
-        <p className="text-slate-500 mt-2 max-w-sm">
-          Thank you for applying to Black Drop Trucking. Our compliance team will review your DQ file shortly.
-        </p>
-        <button 
-          onClick={() => setSubmitted(false)}
-          className="mt-8 text-emerald-600 font-bold text-sm underline"
-        >
-          Submit another application
-        </button>
-      </div>
-    );
-  }
+export default function MobileCheckIn() {
+  const [status, setStatus] = useState('offline');
 
   return (
-    <div className="p-8 bg-slate-50 min-h-screen">
-      <div className="max-w-3xl mx-auto">
-        <header className="mb-10 text-center">
-          <div className="inline-block p-3 bg-slate-900 text-emerald-400 rounded-2xl mb-4">
-            <FileSignature size={32} />
+    <div className="min-h-screen bg-slate-900 text-white p-6 flex flex-col items-center justify-center">
+      <div className="w-full max-w-sm space-y-8">
+        <header className="text-center">
+          <div className="w-16 h-16 bg-emerald-500 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-emerald-500/20">
+            <Lucide.Truck className="text-slate-900" size={32} />
           </div>
-          <h1 className="text-3xl font-black text-slate-900 tracking-tight uppercase">Driver Application</h1>
-          <p className="text-slate-500 font-medium italic">Join the Black Drop Trucking Fleet</p>
+          <h1 className="text-2xl font-black uppercase italic tracking-tighter">Black Drop Mobile</h1>
+          <p className="text-slate-400 text-xs font-bold uppercase mt-1">Driver Portal | Midland, TX</p>
         </header>
 
-        <form 
-          onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }}
-          className="space-y-6"
-        >
-          {/* Section: Personal Info */}
-          <div className="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm">
-            <h3 className="text-sm font-black text-slate-400 uppercase tracking-widest mb-6 flex items-center gap-2">
-              <User size={16} className="text-emerald-500" /> Personal Information
-            </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="space-y-1">
-                <label className="text-xs font-bold text-slate-700">Full Legal Name</label>
-                <input type="text" required className="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 ring-emerald-500 outline-none transition-all" placeholder="Enter name" />
-              </div>
-              <div className="space-y-1">
-                <label className="text-xs font-bold text-slate-700">Email Address</label>
-                <input type="email" required className="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 ring-emerald-500 outline-none transition-all" placeholder="name@example.com" />
-              </div>
-            </div>
-          </div>
-
-          {/* Section: Licensing */}
-          <div className="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm">
-            <h3 className="text-sm font-black text-slate-400 uppercase tracking-widest mb-6 flex items-center gap-2">
-              <IdCard size={16} className="text-emerald-500" /> CDL Credentials
-            </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="space-y-1">
-                <label className="text-xs font-bold text-slate-700">CDL Number</label>
-                <input type="text" required className="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 ring-emerald-500 outline-none transition-all" placeholder="State + Number" />
-              </div>
-              <div className="space-y-1">
-                <label className="text-xs font-bold text-slate-700">License State</label>
-                <select className="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 ring-emerald-500 outline-none transition-all">
-                  <option>Texas</option>
-                  <option>New Mexico</option>
-                  <option>Oklahoma</option>
-                </select>
-              </div>
-            </div>
+        <div className="bg-slate-800 p-8 rounded-[40px] border border-slate-700 shadow-2xl space-y-6">
+          <div className="space-y-2">
+            <label className="text-[10px] font-black uppercase text-slate-500 ml-2">Assign Unit</label>
+            <input type="text" placeholder="e.g. TK-101" className="w-full p-4 rounded-2xl bg-slate-900 border border-slate-700 focus:border-emerald-500 outline-none font-mono text-emerald-400" />
           </div>
 
           <button 
-            type="submit"
-            className="w-full bg-slate-900 text-emerald-400 py-4 rounded-2xl font-black uppercase tracking-widest hover:bg-slate-800 shadow-xl transition-all"
+            onClick={() => setStatus('online')}
+            className={`w-full py-6 rounded-[30px] font-black uppercase tracking-widest transition-all ${
+              status === 'online' ? 'bg-emerald-500 text-slate-900 shadow-xl shadow-emerald-500/20' : 'bg-slate-700 text-slate-400'
+            }`}
           >
-            Submit Application
+            {status === 'online' ? 'Shift Active' : 'Clock In'}
           </button>
-        </form>
+        </div>
+
+        <footer className="text-center text-[10px] text-slate-600 font-bold uppercase tracking-widest">
+          Authorized Access Only — Rafael Ayala
+        </footer>
       </div>
     </div>
   );

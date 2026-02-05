@@ -14,11 +14,16 @@ export default function ReportsPage() {
         <header className="flex justify-between items-end mb-8">
           <div>
             <h1 className="text-3xl font-black text-slate-900 uppercase italic underline decoration-emerald-500">Compliance Reports</h1>
-            <p className="text-slate-500 font-medium">Safety logs and inspection history</p>
+            <p className="text-slate-500 font-medium">Audit-ready logs and history</p>
           </div>
-          <button className="bg-slate-900 text-white px-6 py-2 rounded-xl font-bold text-sm flex items-center gap-2">
-            <Lucide.FilePlus size={16} className="text-emerald-400" /> New Report
-          </button>
+          <div className="flex gap-3">
+            <button className="bg-white border border-slate-200 text-slate-600 px-4 py-2 rounded-xl font-bold text-sm flex items-center gap-2 hover:bg-slate-50">
+              <Lucide.Download size={16} /> Export PDF
+            </button>
+            <button className="bg-slate-900 text-white px-6 py-2 rounded-xl font-bold text-sm flex items-center gap-2 hover:bg-emerald-600 transition-all">
+              <Lucide.FilePlus size={16} className="text-emerald-400" /> New Report
+            </button>
+          </div>
         </header>
 
         <div className="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden">
@@ -30,11 +35,12 @@ export default function ReportsPage() {
                 <th className="px-8 py-5">Inspection Type</th>
                 <th className="px-8 py-5">Unit</th>
                 <th className="px-8 py-5">Status</th>
+                <th className="px-8 py-5">Action</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100">
               {reports.map((report) => (
-                <tr key={report.id} className="hover:bg-slate-50 transition-colors">
+                <tr key={report.id} className="hover:bg-slate-50">
                   <td className="px-8 py-5 font-bold text-slate-800">{report.id}</td>
                   <td className="px-8 py-5 text-sm text-slate-500">{report.date}</td>
                   <td className="px-8 py-5 text-sm font-bold text-slate-700">{report.type}</td>
@@ -43,6 +49,11 @@ export default function ReportsPage() {
                     <span className={`px-3 py-1 rounded-full text-[10px] font-black uppercase ${
                       report.status === 'Clean' || report.status === 'Verified' ? 'bg-emerald-50 text-emerald-600' : 'bg-amber-50 text-amber-600'
                     }`}>{report.status}</span>
+                  </td>
+                  <td className="px-8 py-5">
+                    <button className="p-2 text-slate-400 hover:text-emerald-500 transition-colors">
+                      <Lucide.Eye size={18} />
+                    </button>
                   </td>
                 </tr>
               ))}

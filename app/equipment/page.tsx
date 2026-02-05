@@ -1,5 +1,5 @@
 "use client";
-import { Shield, alertOctagon, RefreshCw, ClipboardCheck, Box } from 'lucide-react';
+import { Shield, AlertOctagon, RefreshCw, ClipboardCheck, Box } from 'lucide-react';
 
 export default function SafetyEquipment() {
   const inventory = [

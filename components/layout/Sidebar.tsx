@@ -17,7 +17,12 @@ export default function Sidebar() {
   return (
     <aside className="w-64 bg-slate-900 h-screen sticky top-0 flex flex-col border-r border-slate-800">
       <div className="p-6">
-        <h2 className="text-emerald-400 font-black text-xl tracking-tighter uppercase">BlackHorn</h2>
+        <div className="flex flex-col">
+  <h2 className="text-white font-black text-xl tracking-tighter uppercase leading-none">
+    Black <span className="text-emerald-500">Drop</span>
+  </h2>
+  <p className="text-slate-500 text-[10px] font-bold uppercase tracking-[0.2em] mt-1">Trucking</p>
+</div>
         <p className="text-slate-500 text-[10px] font-bold uppercase tracking-widest">Compliance v1.0</p>
       </div>
       

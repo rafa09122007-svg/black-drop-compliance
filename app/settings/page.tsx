@@ -11,6 +11,7 @@ export default function SettingsPage() {
         </header>
 
         <div className="space-y-6">
+          {/* Company Profile Card */}
           <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm flex items-center justify-between">
             <div className="flex items-center gap-4">
               <div className="p-4 bg-slate-100 rounded-2xl text-slate-400">
@@ -21,9 +22,12 @@ export default function SettingsPage() {
                 <p className="text-xs text-slate-500 italic">Black Drop Trucking | Midland, TX</p>
               </div>
             </div>
-            <button className="text-sm font-bold text-emerald-600 underline">Edit Logo</button>
+            <button className="bg-slate-900 text-white px-4 py-2 rounded-lg text-xs font-bold hover:bg-emerald-600 transition-colors">
+              Update Logo
+            </button>
           </div>
 
+          {/* Admin Info Card */}
           <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm flex items-center justify-between">
             <div className="flex items-center gap-4">
               <div className="p-4 bg-slate-100 rounded-2xl text-slate-400">
@@ -34,7 +38,9 @@ export default function SettingsPage() {
                 <p className="text-xs text-slate-500 italic font-mono uppercase">Rafael Ayala</p>
               </div>
             </div>
-            <button className="text-sm font-bold text-slate-400 cursor-not-allowed">Active Session</button>
+            <span className="px-3 py-1 bg-emerald-50 text-emerald-600 rounded-full text-[10px] font-black uppercase">
+              Active Session
+            </span>
           </div>
         </div>
       </div>
